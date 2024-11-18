@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mariadb = require('mariadb');
+const db = require('./database');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
@@ -22,6 +22,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -29,21 +31,15 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-    secret: '6Avril@237',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Utilisez 'true' si on utilise https
-}));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
