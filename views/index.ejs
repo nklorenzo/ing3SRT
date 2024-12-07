@@ -1,105 +1,107 @@
- <html>
+<html>
 
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>E-commerce Header</title>
-     <link href="/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
-     <link href="/Font-Awesome-6.x/css/all.min.css" rel="stylesheet">
-     <link href="/stylesheets/style.css" rel="stylesheet">
- </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Header</title>
+    <link href="/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Font-Awesome-6.x/css/all.min.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+</head>
 
- <body>
+<body>
+    <header class="bg-white shadow-sm sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light container py-3">
+            <div class="container-fluid"> <a class="navbar-brand" href="https://example.com"> <i class="fas fa-store text-primary me-2"></i>
+                    NKSHOP
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <form class="search-form mx-auto">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Rechercher un produit...">
+                            <button type="submit">
+                                <i class="fas fa-search"></i> </button>
+                        </div>
+                    </form>
 
-     <header class="bg-white shadow-sm sticky-top">
-         <nav class="navbar navbar-expand-lg navbar-light container py-3">
-             <div class="container-fluid">
-                 <a class="navbar-brand" href="https://example.com">
-                     <i class="fas fa-store text-primary me-2"></i>
-                     NKSHOP
-                 </a>
-
-                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                     <span class="navbar-toggler-icon"></span>
-                 </button>
-
-                 <div class="collapse navbar-collapse" id="navbarContent">
-                     <form class="search-form mx-auto">
-                         <div class="input-group">
-                             <input type="search" class="form-control" placeholder="Rechercher un produit...">
-                             <button type="submit">
-                                 <i class="fas fa-search"></i>
-                             </button>
-                         </div>
-                     </form>
-
-                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-                     </ul>
-                 </div>
-             </div>
-         </nav>
-
-         <div class="container py-2 border-top">
-             <ul class="nav justify-content-center">
-                 <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">
-                         Catégories
-                     </a>
-                     <ul class="dropdown-menu">
-                         <li><a class="dropdown-item" href="https://example.com/electronics">Électronique</a></li>
-                         <li><a class="dropdown-item" href="https://example.com/fashion">Mode</a></li>
-                         <li><a class="dropdown-item" href="https://example.com/home">Maison</a></li>
-                     </ul>
-                 </li>
-                 <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown">
-                         <i class="fas fa-user me-1"></i>
-                         Compte
-                     </a>
-                     <ul class="dropdown-menu account-dropdown">
-                         <li class="px-3 py-2 d-none" id="accountPreview">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container py-2 border-top">
+            <ul class="nav justify-content-center">
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown"> Catégories
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="https://example.com/electronics">Électronique</a></li>
+                        <li><a class="dropdown-item" href="https://example.com/fashion">Mode</a></li>
+                        <li><a class="dropdown-item" href="https://example.com/home">Maison</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user me-1"></i>
+                        Compte
+                    </a>
+                    <ul class="dropdown-menu account-dropdown">
+                        <li class="px-3 py-2" id="accountPreview" <%= user ? '' : 'style="display: none;"' %>>
+                            <div class="d-flex align-items-center mb-2"> <i class="fas fa-user-circle fa-2x me-2 text-primary"></i>
+                                <div>
+                                    <strong id="userName"><%= user ? user.prenom : '' %></strong>
+                                    <div class="small text-muted" id="userEmail"><%= user ? user.email : '' %></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" <%= user ? '' : 'style="display: none;"' %> id="accountDivider">
+                        </li>
+                        <li> <a class="dropdown-item" href="#" id="loginLink" <%= user ? 'style="display: none;"' : '' %>>
+                                <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                            </a> </li>
+                        <li>
+                            <a class="dropdown-item" href="#" id="registerLink" <%= user ? 'style="display: none;"' : '' %>> <i class="fas fa-user-plus me-2"></i>S'inscrire
+                            </a> </li>
+                        <li id="accountMenuItems" <%= user ? '' : 'style="display: none;"' %>>
+                            <a class="dropdown-item" href="#" id="profileLink"><i class="fas fa-user-edit me-2"></i>Mon profil</a>
+                            <a class="dropdown-item" href="#" id="ordersLink"><i class="fas fa-box me-2"></i>Mes commandes</a>
+                            <a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Déconnexion</a>
+                        </li>
+                        <!--<li class="px-3 py-2 d-none" id="accountPreview">
                              <div class="d-flex align-items-center mb-2">
-
-                                 <i class="fas fa-user-circle fa-2x me-2 text-primary"></i>
-                                 <div>
-                                     <strong id="userName"> ? </strong>
-                                     <div class="small text-muted" id="userEmail"> ? </div>
-                                 </div>
-
+                                                                                <i class="fas fa-user-circle fa-2x me-2 text-primary"></i>                                    <div>
+                                     <strong id="userName"> ? </strong>                                                            <div class="small text-muted" id="userEmail"> ? </div>
+                                 </div>        
                              </div>
                          </li>
                          <li>
                              <hr class="dropdown-divider d-none" id="accountDivider">
-                         </li>
-                         <li><a class="dropdown-item" href="#" id="loginLink"><i class="fas fa-sign-in-alt me-2"></i>Se connecter</a></li>
+                         </li>                                          <li><a class="dropdown-item" href="#" id="loginLink"><i class="fas fa-sign-in-alt me-2"></i>Se connecter</a></li>
                          <li><a class="dropdown-item" href="#" id="registerLink"><i class="fas fa-user-plus me-2"></i>S'inscrire</a></li>
                          <li class="d-none" id="accountMenuItems">
-                             <a class="dropdown-item" href="#" id="profileLink"><i class="fas fa-user-edit me-2"></i>Mon profil</a>
-                             <a class="dropdown-item" href="#" id="ordersLink"><i class="fas fa-box me-2"></i>Mes commandes</a>
-                             <a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Déconnexion</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="nav-item position-relative">
-                     <a class="nav-link cart-icon disabled" href="#" id="cartButton">
-                         <i class="fas fa-shopping-cart"></i>
-                         <span class="cart-count" style="display: none;">3</span>
-                     </a>
-                     <%- include('panier') %>
-                 </li>
-             </ul>
-         </div>
-     </header>
+                             <a class="dropdown-item" href="#" id="profileLink"><i class="fas fa-user-edit me-2"></i>Mon profil</a>                                       <a class="dropdown-item" href="#" id="ordersLink"><i class="fas fa-box me-2"></i>Mes commandes</a>
+                             <a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Déconnexion</a>                                                                    </li>-->
+                    </ul>
+                </li>
+                <li class="nav-item position-relative">
+                    <a class="nav-link cart-icon disabled" href="#" id="cartButton"> <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" style="display: none;">3</span>
+                    </a>
+                    <%- include('panier') %> </li>
+            </ul>
+        </div>
+    </header>
 
-     <%- include('connexion') %>
-     <%- include('inscription') %>
-     <%- include('profileUtilisateur') %>
-     <%- include('commandes') %>
+    <%- include('connexion') %>
+    <%- include('inscription') %>
+    <%- include('profileUtilisateur') %> <%- include('commandes') %>
+    <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+</body>
 
-     <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-     <script src="/javascripts/main.js"></script>
- </body>
+</html>
 
- </html>
-
- </html>
+</html>

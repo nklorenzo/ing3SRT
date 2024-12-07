@@ -128,8 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
             loginRequired.style.display = 'none';
             cartContent.style.display = 'block';
             //utiliser les données injectées
-            userName.textContent = '?';
-            userEmail.textContent = '?';
         } else {
             cartIcon.classList.add('disabled');
             cartCount.style.display = 'none';
@@ -271,6 +269,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Mettre à jour l'interface utilisateur
+    updateLoginState(false);
+    updateAccountUI(false);
+
     document.getElementById('profileLink').addEventListener('click', (e) => {
         e.preventDefault();
         profileModal.show();
@@ -288,4 +290,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     updateLoginState(false);
+
+    logoutBtn.addEventListener('click', (e) => {
+        e.preventDefault(); // Bonne pratique pour bloquer le comportement par défaut
+
+        fetch('/users/deconnexion', {
+                method: 'POST',
+                credentials: 'include', //IMPORTANT : Inclure les credentials pour les cookies
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                // Vérifier le statut de la réponse
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    // Gérer les erreurs HTTP
+                    throw new Error('La déconnexion a échoué');
+                }
+            })
+            .then(data => {
+                // Vérifier la réponse du serveur
+                if (data.success) {
+                    // Redirection ou rechargement
+                    window.location.href = '/'; // Rediriger vers l'accueil
+                } else {
+                    // Gérer le cas où success est false
+                    console.error('Échec de la déconnexion');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur de déconnexion:', error);
+                alert('Un problème est survenu lors de la déconnexion');
+            });
+    });
+
 });
